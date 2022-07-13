@@ -10,7 +10,7 @@
   <groupId>com.trybe</groupId>
   <artifactId>dronefeeder</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
   <name>Drone Feeder</name>
   <description>App for delivering packages with drones</description>
   <properties>

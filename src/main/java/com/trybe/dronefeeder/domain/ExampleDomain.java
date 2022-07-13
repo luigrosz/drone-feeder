@@ -1,4 +1,4 @@
-package com.trybe.dronefeeder.domain;
+// package com.trybe.dronefeeder.domain;
 
-public class ExampleDomain {
-}
+// public class ExampleDomain {
+// }

@@ -1,2 +1,8 @@
+spring:
+  servlet:
+    multipart:
+      maxFileSize: 1000000MB
+      maxRequestSize: 1000000MB
+
 server:
   port: ${PORT}
