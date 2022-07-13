@@ -1,4 +1,4 @@
-package com.trybe.dronefeeder.dto;
+// package com.trybe.dronefeeder.dto;
 
-public class ExampleDto {
-}
+// public class ExampleDto {
+// }

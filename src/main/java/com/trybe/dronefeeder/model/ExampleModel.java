@@ -1,7 +1,7 @@
-package com.trybe.dronefeeder.model;
+// package com.trybe.dronefeeder.model;
 
-import javax.persistence.Entity;
+// import javax.persistence.Entity;
 
-@Entity
-public class ExampleModel {
-}
+// @Entity
+// public class ExampleModel {
+// }
