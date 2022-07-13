@@ -26,9 +26,14 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class VideoService {
 
-  private static final String DIRECTORY = System.getProperty("user.dir") + "/src/main/resources/static";
+  private static final String DIRECTORY = System.getProperty("user.dir")
+      + "/src/main/resources/static";
 
-  public List<String> upload(List<MultipartFile> multipartFiles) throws IOException {
+  /**
+   * Video upload service.
+   */
+  public List<String> upload(
+      List<MultipartFile> multipartFiles) throws IOException {
     List<String> fileNames = new ArrayList<>();
     for (MultipartFile file : multipartFiles) {
       String fileName = StringUtils.cleanPath(file.getOriginalFilename());
@@ -39,7 +44,11 @@ public class VideoService {
     return fileNames;
   }
 
-  public Map<String, Object> download(@PathVariable("filename") String fileName) throws IOException {
+  /**
+   * Video download service.
+   */
+  public Map<String, Object> download(
+      @PathVariable("filename") String fileName) throws IOException {
     Path filePath = get(DIRECTORY).toAbsolutePath().normalize().resolve(fileName);
     if (!Files.exists(filePath)) {
       throw new FileNotFoundException(fileName + " was not found on the server");

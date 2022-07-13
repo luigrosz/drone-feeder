@@ -1,5 +1,6 @@
 package com.trybe.dronefeeder.controller;
 
+import com.trybe.dronefeeder.service.VideoService;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -17,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.trybe.dronefeeder.service.VideoService;
-
 @RestController
 @RequestMapping("/video")
 public class VideoController {
@@ -27,16 +26,24 @@ public class VideoController {
   VideoService videoService;
 
   @PostMapping("/upload")
-  public ResponseEntity<List<String>> upload(@RequestParam("files") List<MultipartFile> multipartFiles) throws IOException {
+  public ResponseEntity<List<String>> upload(
+      @RequestParam("files") List<MultipartFile> multipartFiles) throws IOException {
     List<String> fileNames = videoService.upload(multipartFiles);
     return ResponseEntity.ok().body(fileNames);
   }
 
+  /**
+   * Video download endpoint.
+   */
   @GetMapping("/download/{filename}")
-  public ResponseEntity<Resource> download(@PathVariable("filename") String fileName) throws IOException {
+  public ResponseEntity<Resource> download(
+      @PathVariable("filename") String fileName) throws IOException {
     Map<String, Object> responseData = videoService.download(fileName);
     return ResponseEntity.ok().contentType((MediaType) responseData.get("contentType"))
-        .headers((HttpHeaders) responseData.get("httpHeader")).body((Resource) responseData.get("resource"));
+        .headers((HttpHeaders) responseData
+            .get("httpHeader"))
+        .body((Resource) responseData
+            .get("resource"));
   }
 
 }
