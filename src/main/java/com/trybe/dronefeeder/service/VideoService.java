@@ -5,6 +5,8 @@ import static java.nio.file.Paths.get;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import static org.springframework.http.HttpHeaders.CONTENT_DISPOSITION;
 
+import com.trybe.dronefeeder.domain.Video;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -23,6 +25,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
+
 @Service
 public class VideoService {
 
@@ -30,16 +33,33 @@ public class VideoService {
       + "/src/main/resources/static";
 
   /**
+   * List all videos service.
+   */
+  public List<Video> list() {
+    File file = new File(DIRECTORY);
+    String[] pathNames = file.list();
+    List<Video> videos = new ArrayList<>();
+    for (int i = 0; i < pathNames.length; i += 1) {
+      Video video = new Video(pathNames[i]);
+      video.setDownloadUrl(pathNames[i]);
+      videos.add(video);
+    }
+    return videos;
+  }
+
+  /**
    * Video upload service.
    */
-  public List<String> upload(
+  public List<Video> upload(
       List<MultipartFile> multipartFiles) throws IOException {
-    List<String> fileNames = new ArrayList<>();
+    List<Video> fileNames = new ArrayList<>();
     for (MultipartFile file : multipartFiles) {
       String fileName = StringUtils.cleanPath(file.getOriginalFilename());
       Path fileStorage = get(DIRECTORY, fileName).toAbsolutePath();
       copy(file.getInputStream(), fileStorage, REPLACE_EXISTING);
-      fileNames.add(fileName);
+      Video video = new Video(fileName);
+      video.setDownloadUrl(fileName);
+      fileNames.add(video);
     }
     return fileNames;
   }
