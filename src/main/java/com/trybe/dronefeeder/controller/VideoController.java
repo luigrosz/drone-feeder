@@ -1,5 +1,6 @@
 package com.trybe.dronefeeder.controller;
 
+import com.trybe.dronefeeder.domain.Video;
 import com.trybe.dronefeeder.service.VideoService;
 import java.io.IOException;
 import java.util.List;
@@ -25,10 +26,16 @@ public class VideoController {
   @Autowired
   VideoService videoService;
 
+  @GetMapping("/list")
+  public ResponseEntity<List<Video>> list() {
+    List<Video> videos = videoService.list();
+    return ResponseEntity.ok(videos);
+  }
+
   @PostMapping("/upload")
-  public ResponseEntity<List<String>> upload(
+  public ResponseEntity<List<Video>> upload(
       @RequestParam("files") List<MultipartFile> multipartFiles) throws IOException {
-    List<String> fileNames = videoService.upload(multipartFiles);
+    List<Video> fileNames = videoService.upload(multipartFiles);
     return ResponseEntity.ok().body(fileNames);
   }
 
