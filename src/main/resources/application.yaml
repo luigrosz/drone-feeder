@@ -3,6 +3,16 @@ spring:
     multipart:
       maxFileSize: 1000000MB
       maxRequestSize: 1000000MB
+  datasource:
+    url: mysql_url
+    username: mysql_username
+    password: mysql_password
+  jpa:
+    hibernate:
+      ddl-auto: update 
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
 
 server:
-  port: ${PORT}
+  port: ${SPRING_LOCAL_PORT}
