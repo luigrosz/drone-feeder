@@ -4,12 +4,13 @@ spring:
       maxFileSize: 1000000MB
       maxRequestSize: 1000000MB
   datasource:
-    url: mysql_url
-    username: mysql_username
-    password: mysql_password
+    # url: jdbc:h2:mem:javatpoint
+    username: ${MYSQLDB_USER}
+    password: ${MYSQLDB_ROOT_PASSWORD}
+    driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: update 
+      ddlAuto: update 
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
