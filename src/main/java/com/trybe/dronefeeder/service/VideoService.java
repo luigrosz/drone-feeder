@@ -32,6 +32,7 @@ public class VideoService {
   private static final String DIRECTORY = System.getProperty("user.dir")
       + "/src/main/resources/static";
 
+
   /**
    * List all videos service.
    */
@@ -64,9 +65,7 @@ public class VideoService {
     return fileNames;
   }
 
-  /**
-   * Video download service.
-   */
+  /** Video download service. */
   public Map<String, Object> download(
       @PathVariable("filename") String fileName) throws IOException {
     Path filePath = get(DIRECTORY).toAbsolutePath().normalize().resolve(fileName);
