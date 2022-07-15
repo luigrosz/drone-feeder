@@ -8,27 +8,28 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-/** Entity. */
 @Entity
 @Table(name = "delivery")
 public class DeliveryModel {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
   private String delivery;
   private String time;
-  
+
   @ManyToOne
   @JoinColumn(name = "drone_id")
   private DroneModel drone;
 
-  public DeliveryModel() {}
+  public DeliveryModel() {
+    // JPA empty constructor
+  }
 
-  public long getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(long id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
