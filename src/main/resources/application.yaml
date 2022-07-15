@@ -1,18 +1,24 @@
 spring:
+  datasource:
+    url: jdbc:mysql://db:3306/dronefeeder?createDatabaseIfNotExist=true
+    username: root
+    password: password
+    driverClassName: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      mode: always
+      platform: mysql
   servlet:
     multipart:
       maxFileSize: 1000000MB
       maxRequestSize: 1000000MB
-  datasource:
-    url: mysql_url
-    username: mysql_username
-    password: mysql_password
   jpa:
-    hibernate:
-      ddl-auto: update 
+    show-sql: true
+    hibernate.ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-
+        generate-ddl: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        
 server:
-  port: ${SPRING_LOCAL_PORT}
+  port: 8080

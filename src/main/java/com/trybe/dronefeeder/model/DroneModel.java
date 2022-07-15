@@ -15,11 +15,11 @@ import javax.persistence.Table;
 @Table(name = "drone")
 public class DroneModel {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
   private String latitude;
   private String longitude;
-  private String lastMaintance;
+  private String lastMaintenance;
 
   @OneToMany(mappedBy = "drone",
       cascade = CascadeType.ALL,
@@ -27,11 +27,15 @@ public class DroneModel {
       fetch = FetchType.LAZY)
   private List<DeliveryModel> deliveries;
 
-  public long getId() {
+  public DroneModel() {
+    // JPA empty constructor
+  }
+
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(long id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -51,12 +55,12 @@ public class DroneModel {
     this.longitude = longitude;
   }
 
-  public String getLastMaintance() {
-    return this.lastMaintance;
+  public String getLastMaintenance() {
+    return this.lastMaintenance;
   }
 
-  public void setLastMaintance(String lastMaintance) {
-    this.lastMaintance = lastMaintance;
+  public void setLastMaintenance(String lastMaintenance) {
+    this.lastMaintenance = lastMaintenance;
   }
 
   public List<DeliveryModel> getDeliveries() {
