@@ -18,8 +18,7 @@ public class DroneService {
 
   /** find all. */
   public List<DroneModel> findAll() {
-    List<DroneModel> drones = droneRepository.findAll();
-    return drones;
+    return droneRepository.findAll();
   }
 
   /** create. */
@@ -27,34 +26,33 @@ public class DroneService {
     DroneModel droneModel = new DroneModel();
     droneModel.setLatitude(drone.getLatitude());
     droneModel.setLongitude(drone.getLongitude());
-    droneModel.setLastMaintance(drone.getLastMaintance());
+    droneModel.setLastMaintenance(drone.getLastMaintance());
     return droneRepository.save(droneModel);
   }
 
   /** find by Id. */
-  public DroneModel findById(long id) {
+  public DroneModel findById(Long id) {
     return droneRepository.findById(id).map(drone -> drone)
         .orElseThrow(() -> new NotFoundException("Nenhum registro foi encontrado!"));
   }
 
   /** update. */
-  public DroneModel edit(DroneDto drone, long id) {
+  public DroneModel edit(DroneDto drone, Long id) {
     return droneRepository.findById(id).map(toUpdate -> {
       toUpdate.setLatitude(drone.getLatitude());
       toUpdate.setLongitude(drone.getLongitude());
-      toUpdate.setLastMaintance(drone.getLastMaintance());
+      toUpdate.setLastMaintenance(drone.getLastMaintance());
       droneRepository.save(toUpdate);
       return toUpdate;
-    }).orElseThrow(() -> 
-    new NotFoundException("Não é possível editar, o ID informado não existe"));
+    }).orElseThrow(() -> new NotFoundException("Não é possível editar, o ID informado não existe"));
   }
 
   /** delete. */
-  public DroneModel delete(long id) {
+  public DroneModel delete(Long id) {
     return droneRepository.findById(id).map(toDelete -> {
       droneRepository.deleteById(id);
       return toDelete;
-    }).orElseThrow(() -> 
-    new NotFoundException("Não é possível deletar, o ID informado não existe"));
+    }).orElseThrow(
+      () -> new NotFoundException("Não é possível deletar, o ID informado não existe"));
   }
 }
