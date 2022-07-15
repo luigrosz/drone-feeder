@@ -3,7 +3,7 @@ package com.trybe.dronefeeder.dto;
 public class DroneDto {
   private String latitude;
   private String longitude;
-  private String lastMaintance;
+  private String lastMaintenance;
 
   public String getLatitude() {
     return this.latitude;
@@ -21,11 +21,11 @@ public class DroneDto {
     this.longitude = longitude;
   }
 
-  public String getLastMaintance() {
-    return this.lastMaintance;
+  public String getLastMaintenance() {
+    return this.lastMaintenance;
   }
 
-  public void setLastMaintance(String lastMaintance) {
-    this.lastMaintance = lastMaintance;
+  public void setLastMaintenance(String lastMaintenance) {
+    this.lastMaintenance = lastMaintenance;
   }
 }
