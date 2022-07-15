@@ -39,9 +39,7 @@ public class VideoController {
     return ResponseEntity.ok().body(fileNames);
   }
 
-  /**
-   * Video download endpoint.
-   */
+  /** Video download endpoint. */
   @GetMapping("/download/{filename}")
   public ResponseEntity<Resource> download(
       @PathVariable("filename") String fileName) throws IOException {
