@@ -41,7 +41,7 @@ public class DroneController {
 
   /** update controller. */
   @PutMapping("/edit/{id}")
-  public ResponseEntity<String> edit(@RequestBody DroneDto drone, @PathVariable("id") Integer id) {
+  public ResponseEntity<String> edit(@RequestBody DroneDto drone, @PathVariable("id") Long id) {
     droneService.edit(drone, id);
     String message = String.format("ID [%d] atualizado", id);
     return ResponseEntity.ok(message);
@@ -49,7 +49,7 @@ public class DroneController {
 
   /** delete controller. */
   @DeleteMapping("/delete/{id}")
-  public ResponseEntity<String> delete(@PathVariable("id") Integer id) {
+  public ResponseEntity<String> delete(@PathVariable("id") Long id) {
     droneService.delete(id);
     String message = String.format("ID [%d] removido", id);
     return ResponseEntity.ok(message);
