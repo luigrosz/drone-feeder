@@ -26,13 +26,12 @@ public class DroneController {
   private DroneService droneService;
 
   /** create controller. */
-  @PostMapping("/hello")
+  @PostMapping()
   public ResponseEntity<String> create(@RequestBody DroneDto drone) {
     droneService.create(drone);
-    
     return ResponseEntity.status(HttpStatus.CREATED).body("Inserido");
   }
-
+  
   /** getAll controller. */
   @GetMapping()
   public ResponseEntity<List<DroneModel>> findAll() {
