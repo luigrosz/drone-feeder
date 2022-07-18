@@ -27,7 +27,7 @@ public class DroneControllerTest {
 
   
   @Test
-  public void deveTestar200() throws Exception {
+  public void getAllCorrect() throws Exception {
     mockMvc.perform(get("/drone"))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
