@@ -4,21 +4,26 @@ services:
     build: .
     restart: on-failure
     ports:
-      - 8080:8080
+      - $SPRING_PORT:$SPRING_PORT
     depends_on:
       - db
+    env_file:
+      - ./.env
     environment:
-      WAIT_HOSTS: db:3306
+      WAIT_HOSTS: db:$DB_PORT
   db:
     image: mysql:latest
     restart: always
+    env_file:
+      - ./.env
     environment:
-      MYSQL_DATABASE: dronefeeder
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: ${DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_TCP_PORT: ${DB_PORT}
     expose:
-      - 3306
+      - $DB_PORT
     ports:
-      - 3306:3306
+      - $DB_PORT:$DB_PORT
     volumes:
       - my-db:/var/lib/mysql
 volumes:
