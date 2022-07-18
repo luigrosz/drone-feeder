@@ -3,5 +3,6 @@ RUN mkdir -p /app
 WORKDIR /app
 ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.9.0/wait /wait
 RUN chmod +x /wait
+COPY ./environmental.yaml /app/environmental.yaml
 COPY ./target/*.jar /app/app.jar
-CMD /wait && java -jar /app/app.jar
+CMD /wait && java -jar /app/app.jar --spring.config.name=environmental
