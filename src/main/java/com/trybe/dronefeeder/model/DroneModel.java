@@ -31,6 +31,17 @@ public class DroneModel {
     // JPA empty constructor
   }
 
+  /** DroneModel constructor for unit tests. */
+  public DroneModel(Long id, 
+      String latitude, 
+      String longitude,
+      String lastMaintenance) {
+    this.id = id;
+    this.latitude = latitude;
+    this.longitude = longitude;
+    this.lastMaintenance = lastMaintenance;
+  }
+
   public Long getId() {
     return this.id;
   }
