@@ -1,7 +1,6 @@
 package com.trybe.dronefeeder.controller;
 
 import com.trybe.dronefeeder.dto.DroneDto;
-import com.trybe.dronefeeder.model.DroneModel;
 import com.trybe.dronefeeder.service.DroneService;
 
 import java.util.List;
@@ -27,31 +26,29 @@ public class DroneController {
 
   /** create controller. */
   @PostMapping()
-  public ResponseEntity<String> create(@RequestBody DroneDto drone) {
-    droneService.create(drone);
-    return ResponseEntity.status(HttpStatus.CREATED).body("Inserido");
+  public ResponseEntity<DroneDto> create(@RequestBody DroneDto drone) {
+    DroneDto createdEntity = droneService.create(drone);
+    return ResponseEntity.status(HttpStatus.CREATED).body(createdEntity);
   }
-  
+
   /** getAll controller. */
   @GetMapping()
-  public ResponseEntity<List<DroneModel>> findAll() {
-    List<DroneModel> drones = droneService.findAll();
+  public ResponseEntity<List<DroneDto>> findAll() {
+    List<DroneDto> drones = droneService.findAll();
     return ResponseEntity.ok(drones);
   }
 
   /** update controller. */
   @PutMapping("/{id}")
-  public ResponseEntity<String> edit(@RequestBody DroneDto drone, @PathVariable("id") Long id) {
-    droneService.edit(drone, id);
-    String message = String.format("ID [%d] atualizado", id);
-    return ResponseEntity.ok(message);
+  public ResponseEntity<DroneDto> update(@RequestBody DroneDto drone, @PathVariable("id") Long id) {
+    DroneDto updatedEntity = droneService.update(drone, id);
+    return ResponseEntity.ok(updatedEntity);
   }
 
   /** delete controller. */
   @DeleteMapping("/{id}")
-  public ResponseEntity<String> delete(@PathVariable("id") Long id) {
-    droneService.delete(id);
-    String message = String.format("ID [%d] removido", id);
-    return ResponseEntity.ok(message);
+  public ResponseEntity<DroneDto> delete(@PathVariable("id") Long id) {
+    DroneDto deletedEntity = droneService.delete(id);
+    return ResponseEntity.ok(deletedEntity);
   }
-} 
+}
