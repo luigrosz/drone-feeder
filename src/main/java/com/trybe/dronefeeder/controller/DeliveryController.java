@@ -41,29 +41,19 @@ public class DeliveryController {
     return ResponseEntity.status(HttpStatus.OK).body(delivery);
   }
 
-  /** update controller. */
-  @PutMapping("/{id}")
-  public ResponseEntity<HashMap<String, String>> edit(
-      @RequestBody DeliveryDto delivery,
-      @PathVariable("id") Long id) {
-    DeliveryDto edited = deliveryService.update(delivery, id);
-    System.out.println(edited.getId());
+  // /** update controller. */
+  // @PutMapping("/{id}")
+  // public ResponseEntity<DeliveryDto> edit(
+  //     @RequestBody DeliveryDto delivery,
+  //     @PathVariable("id") Long id) {
+  //   DeliveryDto edited = deliveryService.update(delivery, id);
+  //   return ResponseEntity.status(HttpStatus.OK).body(edited);
+  // }
 
-    HashMap<String, String> obj = new HashMap<String, String>();
-    String message = String.format("ID [%d] atualizado", edited.getId());
-    obj.put("message", message);
-    return ResponseEntity.status(HttpStatus.OK).body(obj);
-  }
-
-  /** delete controller. */
-  @DeleteMapping("/{id}")
-  public ResponseEntity<HashMap<String, String>> delete(@PathVariable("id") Long id) {
-    DeliveryDto removed = deliveryService.delete(id);
-    HashMap<String, String> obj = new HashMap<String, String>();
-
-    String message = String.format("ID [%d] removido", removed.getId());
-    obj.put("message", message);
-
-    return ResponseEntity.status(HttpStatus.OK).body(obj);
-  }
+  // /** delete controller. */
+  // @DeleteMapping("/{id}")
+  // public ResponseEntity<DeliveryDto> delete(@PathVariable("id") Long id) {
+  //   DeliveryDto removed = deliveryService.delete(id);
+  //   return ResponseEntity.status(HttpStatus.OK).body(removed);
+  // }
 } 

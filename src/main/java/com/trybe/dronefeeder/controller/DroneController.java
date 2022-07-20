@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 @RestController
 @RequestMapping("/drone")
 public class DroneController {
@@ -37,7 +38,8 @@ public class DroneController {
 
   /** update controller. */
   @PutMapping("/{id}")
-  public ResponseEntity<DroneDto> update(@RequestBody DroneDto drone, @PathVariable("id") Long id) {
+  public ResponseEntity<DroneDto> update(@RequestBody DroneDto drone,
+      @PathVariable("id") Long id) {
     DroneDto updatedEntity = droneService.update(drone, id);
     return ResponseEntity.ok(updatedEntity);
   }
