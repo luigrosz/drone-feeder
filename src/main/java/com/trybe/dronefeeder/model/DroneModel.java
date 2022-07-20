@@ -21,7 +21,8 @@ public class DroneModel {
   private String longitude;
   private String lastMaintenance;
 
-  @OneToMany(mappedBy = "drone",
+  @OneToMany(
+      mappedBy = "drone",
       cascade = CascadeType.ALL,
       orphanRemoval = true,
       fetch = FetchType.LAZY)
