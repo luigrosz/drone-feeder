@@ -1,10 +1,8 @@
 package com.trybe.dronefeeder.validations;
 
 import com.trybe.dronefeeder.exceptions.BadRequestException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 public class ValidateBody {
 
@@ -13,29 +11,33 @@ public class ValidateBody {
 
   /** Validate drone controller latitude. */
   public static void latitude(String latitude) {
-    String latitudeRegex = "^-?([1-8]?[1-9]|[1-9]0)\\.{1}\\d{1,6}";
+    String latitudeRegex = "^(\\-?([0-8]?\\d(\\.\\d+)?|90(.0+)?))$";
     if (!latitude.matches(latitudeRegex)) {
-      throw new BadRequestException("The latitude of the request is wrong");
+      throw new BadRequestException("The request latitude is wrong");
     }
   }
 
   /** Validate drone controller longitude. */
   public static void longitude(String longitude) {
-    String longitudeRegex = "^-?([1]?[1-7][1-9]|[1]?[1-8][0]|[1-9]?[0-9])\\.{1}\\d{1,6}";
+    String longitudeRegex = "(\\-?(1?[0-7]?\\d(\\.\\d+)?|180((.0+)?)))$";
     if (!longitude.matches(longitudeRegex)) {
-      throw new BadRequestException("The longitude of the request is wrong");
+      throw new BadRequestException("The request longitude is wrong");
     }
   }
 
   /** Validate drone controller date. */
-  public static Date date(String lastMaintenance) throws Exception {
-    Date date = new SimpleDateFormat("yyyy-MM-dd").parse(lastMaintenance);
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    LocalDate parsedDate = LocalDate.parse(lastMaintenance, formatter);
-    if (!parsedDate.isAfter(LocalDate.of(2022, 07, 14))) {
-      throw new Exception();
+  public static String date(String lastMaintenance) {
+    LocalDate parsedDate;
+    try {
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+      parsedDate = LocalDate.parse(lastMaintenance, formatter);
+    } catch (Exception e) {
+      throw new BadRequestException("The request date is not valid");
     }
-    return date;
+    if (!parsedDate.isAfter(LocalDate.of(2022, 07, 14))) {
+      throw new BadRequestException("The request date is not valid");
+    }
+    return lastMaintenance;
   }
 
 }
