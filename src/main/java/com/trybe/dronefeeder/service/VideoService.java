@@ -33,7 +33,7 @@ public class VideoService {
   /**
    * List all videos service.
    */
-  public List<Video> list() {
+  public List<Video> findAll() {
     File file = new File(DIRECTORY);
     String[] pathNames = file.list();
     List<Video> videos = new ArrayList<>();

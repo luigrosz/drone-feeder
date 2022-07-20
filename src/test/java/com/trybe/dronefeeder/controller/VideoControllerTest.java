@@ -1,6 +1,7 @@
 package com.trybe.dronefeeder.controller;
 
 import static org.hamcrest.Matchers.containsString;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -20,8 +21,6 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-
-
 @RunWith(SpringRunner.class)
 @WebMvcTest(VideoController.class)
 public class VideoControllerTest {
@@ -30,11 +29,12 @@ public class VideoControllerTest {
   private MockMvc mockMvc;
 
   @MockBean
+
   private VideoService service;
 
   @Test
   public void succesfulFindAll() throws Exception {
-    mockMvc.perform(get("/video/list"))
+    mockMvc.perform(get("/video"))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(content().string(containsString("[]")));
@@ -44,7 +44,7 @@ public class VideoControllerTest {
   public void succesfulUpload() throws Exception {
     File file = new File(
         System.getProperty("user.dir")
-            + "/src/test/java/com/trybe/dronefeeder/mocks/videoplayback.mp4");
+            + "/src/test/java/com/trybe/dronefeeder/mocks/testVideo1.mp4");
     byte[] fileContent = Files.readAllBytes(file.toPath());
     MockMultipartFile files = new MockMultipartFile("files",
         "videoplayback.mp4", "multipart/form-data",

@@ -4,7 +4,6 @@ import com.trybe.dronefeeder.model.DroneModel;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class DroneDto {
   private Long id;
   private String latitude;
