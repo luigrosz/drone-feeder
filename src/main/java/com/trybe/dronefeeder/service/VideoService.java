@@ -25,13 +25,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
-
 @Service
 public class VideoService {
 
-  private static final String DIRECTORY = System.getProperty("user.dir")
-      + "/src/main/resources/static";
-
+  private static final String DIRECTORY = "/app";
 
   /**
    * List all videos service.
