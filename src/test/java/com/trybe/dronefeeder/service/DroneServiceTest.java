@@ -61,33 +61,33 @@ public class DroneServiceTest {
 
   @Test
   public void wrongLatitudeCreate() {
-    Exception BadRequest = Assertions.assertThrows(BadRequestException.class,
+    Exception badRequest = Assertions.assertThrows(BadRequestException.class,
         () -> service.create(wrongLatitudeDroneDto));
-    assertEquals("The request latitude is wrong", BadRequest.getMessage());
+    assertEquals("The request latitude is wrong", badRequest.getMessage());
   }
 
   @Test
   public void wrongLongituteCreate() {
-    Exception BadRequest = Assertions.assertThrows(
+    Exception badRequest = Assertions.assertThrows(
         BadRequestException.class,
         () -> service.create(wrongLongitudeDroneDto));
-    assertEquals("The request longitude is wrong", BadRequest.getMessage());
+    assertEquals("The request longitude is wrong", badRequest.getMessage());
   }
 
   @Test
   public void wrongDateCreate() {
-    Exception BadRequest = Assertions.assertThrows(
+    Exception badRequest = Assertions.assertThrows(
         BadRequestException.class,
         () -> service.create(wrongDateDroneDto));
-    assertEquals("The request date is not valid", BadRequest.getMessage());
+    assertEquals("The request date is not valid", badRequest.getMessage());
   }
 
   @Test
   public void pastDateCreate() {
-    Exception BadRequest = Assertions.assertThrows(
+    Exception badRequest = Assertions.assertThrows(
         BadRequestException.class,
         () -> service.create(pastDateDroneDto));
-    assertEquals("The request date is not valid", BadRequest.getMessage());
+    assertEquals("The request date is not valid", badRequest.getMessage());
   }
 
   @Test
@@ -99,9 +99,9 @@ public class DroneServiceTest {
 
   @Test
   public void failedFindbyId() {
-    Exception NotFound = Assertions.assertThrows(ResourceNotFoundException.class,
+    Exception notFound = Assertions.assertThrows(ResourceNotFoundException.class,
         () -> service.findById((long) 1));
-    assertEquals("No id was found", NotFound.getMessage());
+    assertEquals("No id was found", notFound.getMessage());
   }
 
   @Test
@@ -114,44 +114,44 @@ public class DroneServiceTest {
 
   @Test
   public void noEntityUpdate() {
-    Exception NotFound = Assertions.assertThrows(ResourceNotFoundException.class,
+    Exception notFound = Assertions.assertThrows(ResourceNotFoundException.class,
         () -> service.update(droneDto1, (long) 1));
-    assertEquals("Not possible to edit, the provided id does not exist", NotFound.getMessage());
+    assertEquals("Not possible to edit, the provided id does not exist", notFound.getMessage());
   }
 
   @Test
   public void wrongLatitudeUpdate() {
     when(repository.findById((long) 1)).thenReturn(Optional.of(drone1));
-    Exception BadRequest = Assertions.assertThrows(BadRequestException.class,
+    Exception badRequest = Assertions.assertThrows(BadRequestException.class,
         () -> service.update(wrongLatitudeDroneDto, (long) 1));
-    assertEquals("The request latitude is wrong", BadRequest.getMessage());
+    assertEquals("The request latitude is wrong", badRequest.getMessage());
   }
 
   @Test
   public void wrongLongituteUpdate() {
     when(repository.findById((long) 1)).thenReturn(Optional.of(drone1));
-    Exception BadRequest = Assertions.assertThrows(
+    Exception badRequest = Assertions.assertThrows(
         BadRequestException.class,
         () -> service.update(wrongLongitudeDroneDto, (long) 1));
-    assertEquals("The request longitude is wrong", BadRequest.getMessage());
+    assertEquals("The request longitude is wrong", badRequest.getMessage());
   }
 
   @Test
   public void wrongDateUpdate() {
     when(repository.findById((long) 1)).thenReturn(Optional.of(drone1));
-    Exception BadRequest = Assertions.assertThrows(
+    Exception badRequest = Assertions.assertThrows(
         BadRequestException.class,
         () -> service.update(wrongDateDroneDto, (long) 1));
-    assertEquals("The request date is not valid", BadRequest.getMessage());
+    assertEquals("The request date is not valid", badRequest.getMessage());
   }
 
   @Test
   public void pastDateUpdate() {
     when(repository.findById((long) 1)).thenReturn(Optional.of(drone1));
-    Exception BadRequest = Assertions.assertThrows(
+    Exception badRequest = Assertions.assertThrows(
         BadRequestException.class,
         () -> service.update(pastDateDroneDto, (long) 1));
-    assertEquals("The request date is not valid", BadRequest.getMessage());
+    assertEquals("The request date is not valid", badRequest.getMessage());
   }
 
   @Test
@@ -163,9 +163,9 @@ public class DroneServiceTest {
 
   @Test
   public void failedDelete() {
-    Exception NotFound = Assertions.assertThrows(ResourceNotFoundException.class,
+    Exception notFound = Assertions.assertThrows(ResourceNotFoundException.class,
         () -> service.delete((long) 1));
-    assertEquals("Not possible to delete, the provided id does not exist", NotFound.getMessage());
+    assertEquals("Not possible to delete, the provided id does not exist", notFound.getMessage());
   }
 
 }
