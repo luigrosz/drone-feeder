@@ -1,58 +1,72 @@
 package com.trybe.dronefeeder.service;
 
 import com.trybe.dronefeeder.dto.DroneDto;
+import com.trybe.dronefeeder.exceptions.ResourceNotFoundException;
 import com.trybe.dronefeeder.model.DroneModel;
 import com.trybe.dronefeeder.repository.DroneRepository;
+import com.trybe.dronefeeder.validations.ValidateBody;
 
 import java.util.List;
-
-import javax.ws.rs.NotFoundException;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DroneService {
+
   @Autowired
   private DroneRepository droneRepository;
 
+  private DroneDto convertToDto(DroneModel entity) {
+    return new DroneDto(entity);
+  }
+
   /** find all. */
-  public List<DroneModel> findAll() {
-    return droneRepository.findAll();
+  public List<DroneDto> findAll() {
+    return droneRepository.findAll().stream().map(this::convertToDto).collect(Collectors.toList());
   }
 
   /** create. */
-  public DroneModel create(DroneDto drone) {
+  public DroneDto create(DroneDto drone) {
     DroneModel droneModel = new DroneModel();
+    ValidateBody.latitude(drone.getLatitude());
+    ValidateBody.longitude(drone.getLongitude());
     droneModel.setLatitude(drone.getLatitude());
     droneModel.setLongitude(drone.getLongitude());
-    droneModel.setLastMaintenance(drone.getLastMaintance());
-    return droneRepository.save(droneModel);
+    String date = ValidateBody.date(drone.getLastMaintenance());
+    droneModel.setLastMaintenance(date);
+
+    return new DroneDto(droneRepository.save(droneModel));
   }
 
   /** find by Id. */
-  public DroneModel findById(Long id) {
-    return droneRepository.findById(id).map(drone -> drone)
-        .orElseThrow(() -> new NotFoundException("Nenhum registro foi encontrado!"));
+  public DroneDto findById(Long id) {
+    return droneRepository.findById(id).map(this::convertToDto)
+        .orElseThrow(() -> new ResourceNotFoundException("No id was found"));
   }
 
   /** update. */
-  public DroneModel edit(DroneDto drone, Long id) {
+  public DroneDto update(DroneDto drone, Long id) {
     return droneRepository.findById(id).map(toUpdate -> {
+      ValidateBody.latitude(drone.getLatitude());
+      ValidateBody.longitude(drone.getLongitude());
       toUpdate.setLatitude(drone.getLatitude());
       toUpdate.setLongitude(drone.getLongitude());
-      toUpdate.setLastMaintenance(drone.getLastMaintance());
-      droneRepository.save(toUpdate);
-      return toUpdate;
-    }).orElseThrow(() -> new NotFoundException("Não é possível editar, o ID informado não existe"));
+      String date = ValidateBody.date(drone.getLastMaintenance());
+      toUpdate.setLastMaintenance(date);
+      return new DroneDto(droneRepository.save(toUpdate));
+    }).orElseThrow(() -> new ResourceNotFoundException(
+        "Not possible to edit, the provided id does not exist"));
   }
 
   /** delete. */
-  public DroneModel delete(Long id) {
+  public DroneDto delete(Long id) {
     return droneRepository.findById(id).map(toDelete -> {
       droneRepository.deleteById(id);
-      return toDelete;
+      return new DroneDto(toDelete);
     }).orElseThrow(
-      () -> new NotFoundException("Não é possível deletar, o ID informado não existe"));
+        () -> new ResourceNotFoundException(
+            "Not possible to delete, the provided id does not exist"));
   }
 }
