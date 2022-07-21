@@ -7,7 +7,8 @@ Nela é possível utilizar CRUD para os drones e para as entregas, além de poss
 
 ## Tecnologias Usadas:
 
->Java, Spring, Hibernate, Persistence, H2, Mockito, MockMvc, Junit, Docker, Docker-Compose, MySQL
+>Java, Spring, Hibernate, Persistence, H2, Mockito, MockMvc, Junit, Docker, Docker-Compose, MySQL, eficode/wait-for
+
 
 ## Instruções:
 Para usar o aplicativo (Necessita do Java JDK 11 instalado):
