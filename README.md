@@ -34,7 +34,7 @@ Executando na máquina (Spring e H2 Database) :
 ##### Video endpoint (POST e GET):
 
 ```html
-https://localhost:8080/video/upload
+http://localhost:8080/video/upload
 ```
 
 Corpo (POST):
@@ -61,7 +61,7 @@ Resposta (POST):
 ##### Drone endpoint (POST):
 
 ```html
-https://localhost:8080/drone
+http://localhost:8080/drone
 ```
 
 Corpo:
@@ -89,7 +89,7 @@ Corpo:
 ##### Drone endpoint (GET):
 
 ```html
-https://localhost:8080/drone
+http://localhost:8080/drone
 ```
     
 Resposta:
@@ -135,7 +135,7 @@ Resposta:
 ###### Drone endpoint (GET):
 
 ```html
-https://localhost:8080/drone/2
+http://localhost:8080/drone/2
 ```
 
 Resposta:
@@ -166,7 +166,7 @@ Resposta:
 ###### Drone endpoint (PUT):
 
 ```html
-https://localhost:8080/drone/2
+http://localhost:8080/drone/2
 ```
 
 Corpo:
@@ -207,7 +207,7 @@ Resposta:
 ##### Drone endpoint (DELETE):
 
 ```html
-https://localhost:8080/drone/1
+http://localhost:8080/drone/1
 ```
 
 Resposta:
