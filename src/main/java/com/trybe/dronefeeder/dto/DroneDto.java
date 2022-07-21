@@ -1,6 +1,5 @@
 package com.trybe.dronefeeder.dto;
 
-import com.trybe.dronefeeder.model.DroneModel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,20 +10,7 @@ public class DroneDto {
   private String lastMaintenance;
   private List<DeliveryDto> deliveries = new ArrayList<>();
 
-  /** DroneDto complete constructor. */
-  public DroneDto(DroneModel entity) {
-    this.id = entity.getId();
-    this.latitude = entity.getLatitude();
-    this.longitude = entity.getLongitude();
-    this.lastMaintenance = entity.getLastMaintenance();
-    List<DeliveryDto> entityDeliveries = getDeliveries();
-    if (entityDeliveries != null && !entityDeliveries.isEmpty()) {
-      entity.getDeliveries().stream().forEach(delivery -> {
-        if (delivery != null) {
-          deliveries.add(new DeliveryDto(delivery));
-        }
-      });
-    }
+  public DroneDto() {
   }
 
   /** DeliveryDto no id constructor. */
