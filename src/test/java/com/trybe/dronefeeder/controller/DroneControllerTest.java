@@ -40,6 +40,12 @@ public class DroneControllerTest {
   }
 
   @Test
+  public void findByIdRoute() throws Exception {
+    mockMvc.perform(get("/drone/1"))
+        .andExpect(status().isOk());
+  }
+
+  @Test
   public void createRoute() throws Exception {
     final var drone = new DroneDto("90.0", "80.0", "2022-07-20");
 
