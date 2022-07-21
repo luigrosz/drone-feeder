@@ -13,7 +13,7 @@ Nela é possível utilizar CRUD para os drones e para as entregas, além de poss
 ## Instruções:
 Para usar o aplicativo (Necessita do Java JDK 11 instalado):
 
-```ruby
+```zsh
 git clone git@github.com:luigrosz/drone-feeder.git
 ```
 
