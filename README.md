@@ -28,7 +28,7 @@ Executando na máquina (Spring e H2 Database) :
 
 ```bash
 cd ./drone-feeder
-./mvnw clean package && java -jar /target/*.jar
+./mvnw clean package && java -jar ./target/*.jar
 ```
 
 ### Exemplos:
