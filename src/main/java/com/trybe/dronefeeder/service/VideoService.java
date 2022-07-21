@@ -25,18 +25,24 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
-
 @Service
 public class VideoService {
 
-  private static final String DIRECTORY = System.getProperty("user.dir")
-      + "/src/main/resources/static";
+  private static final String DIRECTORY = directory();
 
+  /** Directory method. */
+  public static String directory() {
+    String env = System.getenv("DIRECTORY");
+    if (env == null) {
+      return System.getProperty("user.dir") + "/src/main/resources";
+    }
+    return env;
+  }
 
   /**
    * List all videos service.
    */
-  public List<Video> list() {
+  public List<Video> findAll() {
     File file = new File(DIRECTORY);
     String[] pathNames = file.list();
     List<Video> videos = new ArrayList<>();

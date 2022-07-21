@@ -26,9 +26,9 @@ public class VideoController {
   @Autowired
   VideoService videoService;
 
-  @GetMapping("/list")
-  public ResponseEntity<List<Video>> list() {
-    List<Video> videos = videoService.list();
+  @GetMapping()
+  public ResponseEntity<List<Video>> findAll() {
+    List<Video> videos = videoService.findAll();
     return ResponseEntity.ok(videos);
   }
 

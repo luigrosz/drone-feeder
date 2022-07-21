@@ -7,7 +7,6 @@ import com.trybe.dronefeeder.repository.DroneRepository;
 import com.trybe.dronefeeder.validations.ValidateBody;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,17 +17,13 @@ public class DroneService {
   @Autowired
   private DroneRepository droneRepository;
 
-  private DroneDto convertToDto(DroneModel entity) {
-    return new DroneDto(entity);
-  }
-
   /** find all. */
-  public List<DroneDto> findAll() {
-    return droneRepository.findAll().stream().map(this::convertToDto).collect(Collectors.toList());
+  public List<DroneModel> findAll() {
+    return droneRepository.findAll();
   }
 
   /** create. */
-  public DroneDto create(DroneDto drone) {
+  public DroneModel create(DroneDto drone) {
     DroneModel droneModel = new DroneModel();
     ValidateBody.latitude(drone.getLatitude());
     ValidateBody.longitude(drone.getLongitude());
@@ -36,18 +31,17 @@ public class DroneService {
     droneModel.setLongitude(drone.getLongitude());
     String date = ValidateBody.date(drone.getLastMaintenance());
     droneModel.setLastMaintenance(date);
-
-    return new DroneDto(droneRepository.save(droneModel));
+    return droneRepository.save(droneModel);
   }
 
   /** find by Id. */
-  public DroneDto findById(Long id) {
-    return droneRepository.findById(id).map(this::convertToDto)
+  public DroneModel findById(Long id) {
+    return droneRepository.findById(id).map(drone -> drone)
         .orElseThrow(() -> new ResourceNotFoundException("No id was found"));
   }
 
   /** update. */
-  public DroneDto update(DroneDto drone, Long id) {
+  public DroneModel update(DroneDto drone, Long id) {
     return droneRepository.findById(id).map(toUpdate -> {
       ValidateBody.latitude(drone.getLatitude());
       ValidateBody.longitude(drone.getLongitude());
@@ -55,16 +49,16 @@ public class DroneService {
       toUpdate.setLongitude(drone.getLongitude());
       String date = ValidateBody.date(drone.getLastMaintenance());
       toUpdate.setLastMaintenance(date);
-      return new DroneDto(droneRepository.save(toUpdate));
+      return droneRepository.save(toUpdate);
     }).orElseThrow(() -> new ResourceNotFoundException(
         "Not possible to edit, the provided id does not exist"));
   }
 
   /** delete. */
-  public DroneDto delete(Long id) {
+  public DroneModel delete(Long id) {
     return droneRepository.findById(id).map(toDelete -> {
       droneRepository.deleteById(id);
-      return new DroneDto(toDelete);
+      return toDelete;
     }).orElseThrow(
         () -> new ResourceNotFoundException(
             "Not possible to delete, the provided id does not exist"));

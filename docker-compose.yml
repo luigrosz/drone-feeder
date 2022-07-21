@@ -9,6 +9,7 @@ services:
       - db
     environment:
       WAIT_HOSTS: db:3306
+      DIRECTORY: /app/static
   db:
     image: mysql:latest
     restart: always

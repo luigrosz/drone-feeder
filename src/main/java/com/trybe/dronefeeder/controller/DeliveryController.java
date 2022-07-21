@@ -1,9 +1,9 @@
 package com.trybe.dronefeeder.controller;
 
 import com.trybe.dronefeeder.dto.DeliveryDto;
+import com.trybe.dronefeeder.model.DeliveryModel;
 import com.trybe.dronefeeder.service.DeliveryService;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 @RequestMapping("/delivery")
 public class DeliveryController {
@@ -29,41 +28,38 @@ public class DeliveryController {
 
   /** create controller. */
   @PostMapping()
-  public ResponseEntity<DeliveryDto> create(@RequestBody DeliveryDto delivery) {
-    DeliveryDto deliveryCreated = deliveryService.create(delivery);
+  public ResponseEntity<DeliveryModel> create(@RequestBody DeliveryDto delivery) {
+    DeliveryModel deliveryCreated = deliveryService.create(delivery);
     return ResponseEntity.status(HttpStatus.CREATED).body(deliveryCreated);
   }
-  
+
   /** getAll controller. */
   @GetMapping()
-  public ResponseEntity<List<DeliveryDto>> findAll() {
-    List<DeliveryDto> delivery = deliveryService.findAll();
+  public ResponseEntity<List<DeliveryModel>> findAll() {
+    List<DeliveryModel> delivery = deliveryService.findAll();
     return ResponseEntity.status(HttpStatus.OK).body(delivery);
+  }
+
+  /** findById controller. */
+  @GetMapping("/{id}")
+  public ResponseEntity<DeliveryModel> findById(@PathVariable("id") Long id) {
+    DeliveryModel delivery = deliveryService.findById(id);
+    return ResponseEntity.ok(delivery);
   }
 
   /** update controller. */
   @PutMapping("/{id}")
-  public ResponseEntity<HashMap<String, String>> edit(
+  public ResponseEntity<DeliveryModel> edit(
       @RequestBody DeliveryDto delivery,
       @PathVariable("id") Long id) {
-    DeliveryDto edited = deliveryService.update(delivery, id);
-    System.out.println(edited.getId());
-
-    HashMap<String, String> obj = new HashMap<String, String>();
-    String message = String.format("ID [%d] atualizado", edited.getId());
-    obj.put("message", message);
-    return ResponseEntity.status(HttpStatus.OK).body(obj);
+    DeliveryModel edited = deliveryService.update(delivery, id);
+    return ResponseEntity.status(HttpStatus.OK).body(edited);
   }
 
   /** delete controller. */
   @DeleteMapping("/{id}")
-  public ResponseEntity<HashMap<String, String>> delete(@PathVariable("id") Long id) {
-    DeliveryDto removed = deliveryService.delete(id);
-    HashMap<String, String> obj = new HashMap<String, String>();
-
-    String message = String.format("ID [%d] removido", removed.getId());
-    obj.put("message", message);
-
-    return ResponseEntity.status(HttpStatus.OK).body(obj);
+  public ResponseEntity<DeliveryModel> delete(@PathVariable("id") Long id) {
+    DeliveryModel removed = deliveryService.delete(id);
+    return ResponseEntity.status(HttpStatus.OK).body(removed);
   }
-} 
+}

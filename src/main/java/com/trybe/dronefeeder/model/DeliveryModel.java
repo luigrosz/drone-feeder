@@ -1,5 +1,7 @@
 package com.trybe.dronefeeder.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +19,7 @@ public class DeliveryModel {
   private String delivery;
   private String time;
 
+  @JsonBackReference
   @ManyToOne
   @JoinColumn(name = "drone_id")
   private DroneModel drone;
