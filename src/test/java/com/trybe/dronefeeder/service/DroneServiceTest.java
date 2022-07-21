@@ -24,7 +24,7 @@ import org.mockito.MockitoAnnotations;
 public class DroneServiceTest {
 
   @InjectMocks
-  private DroneService service;
+  private DroneService service ;
 
   @Mock
   private DroneRepository repository;
