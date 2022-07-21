@@ -46,17 +46,17 @@ public class DroneServiceTest {
   public void findAll() {
 
     when(repository.findAll()).thenReturn(Arrays.asList(drone1, drone2));
-    List<DroneDto> drones = service.findAll();
+    List<DroneModel> drones = service.findAll();
     Assertions.assertEquals(2, drones.size(), "findAll should return 2 drones");
-    Assertions.assertEquals(List.of(new DroneDto(drone1), new DroneDto(drone2)),
+    Assertions.assertEquals(List.of(drone1, drone2),
         drones);
   }
 
   @Test
   public void succesfulCreate() {
     when(repository.save(any(DroneModel.class))).thenReturn(drone1);
-    DroneDto drone = service.create(droneDto1);
-    Assertions.assertEquals(new DroneDto(drone1), drone);
+    DroneModel drone = service.create(droneDto1);
+    Assertions.assertEquals(drone1, drone);
   }
 
   @Test
@@ -93,8 +93,8 @@ public class DroneServiceTest {
   @Test
   public void succesfulFindbyId() {
     when(repository.findById((long) 1)).thenReturn(Optional.of(drone1));
-    DroneDto drone = service.findById((long) 1);
-    Assertions.assertEquals(new DroneDto(drone1), drone, "edit should return the edited drone");
+    DroneModel drone = service.findById((long) 1);
+    Assertions.assertEquals(drone1, drone, "edit should return the edited drone");
   }
 
   @Test
@@ -108,8 +108,8 @@ public class DroneServiceTest {
   public void succesfulUpdate() {
     when(repository.findById((long) 1)).thenReturn(Optional.of(drone1));
     when(repository.save(any(DroneModel.class))).thenReturn(drone1);
-    DroneDto drone = service.update(droneDto1, (long) 1);
-    Assertions.assertEquals(new DroneDto(drone1), drone);
+    DroneModel drone = service.update(droneDto1, (long) 1);
+    Assertions.assertEquals(drone1, drone);
   }
 
   @Test
@@ -157,8 +157,8 @@ public class DroneServiceTest {
   @Test
   public void succesfulDelete() {
     when(repository.findById((long) 1)).thenReturn(Optional.of(drone1));
-    DroneDto drone = service.delete((long) 1);
-    Assertions.assertEquals(new DroneDto(drone1), drone);
+    DroneModel drone = service.delete((long) 1);
+    Assertions.assertEquals(drone1, drone);
   }
 
   @Test
