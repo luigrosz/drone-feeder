@@ -19,13 +19,13 @@ git clone git@github.com:luigrosz/drone-feeder.git
 
 Utilizando Docker (Spring e MySQL):
 
-```git
+```bash
 ./mvnw clean package && docker compose up --build
 ```
 
 Executando na máquina (Spring e H2 Database) :
 
-```git
+```bash
 ./mvnw clean package && java -jar /target/*.jar
 ```
 
